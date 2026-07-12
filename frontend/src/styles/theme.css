@@ -1,0 +1,243 @@
+/* Instagram-inspired Theme System */
+
+:root {
+    /* Light Mode Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f0f2f5;
+    --bg-tertiary: #efefef;
+    
+    --text-primary: #000000;
+    --text-secondary: #65676b;
+    --text-tertiary: #8a8d91;
+    
+    --border-color: #e5e5e5;
+    --border-light: #f0f2f5;
+    
+    --accent-blue: #0095F6;
+    --accent-blue-hover: #0a7ec8;
+    
+    --card-bg: #ffffff;
+    --card-border: #e5e5e5;
+    
+    --input-bg: #f0f2f5;
+    --input-border: #e5e5e5;
+    --input-text: #000000;
+    
+    --sidebar-bg: #ffffff;
+    --sidebar-border: #e5e5e5;
+    
+    --hover-bg: #f0f2f5;
+    
+    --like-color: #ed4956;
+    --success-color: #31a24c;
+}
+
+:root.dark {
+    /* Dark Mode Colors */
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #1a1a1a;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #b0b3b9;
+    --text-tertiary: #8a8d91;
+    
+    --border-color: #2a2a2a;
+    --border-light: #1a1a1a;
+    
+    --accent-blue: #0095F6;
+    --accent-blue-hover: #1db5ff;
+    
+    --card-bg: #1a1a1a;
+    --card-border: #2a2a2a;
+    
+    --input-bg: #262626;
+    --input-border: #404040;
+    --input-text: #ffffff;
+    
+    --sidebar-bg: #000000;
+    --sidebar-border: #2a2a2a;
+    
+    --hover-bg: #262626;
+    
+    --like-color: #ed4956;
+    --success-color: #31a24c;
+}
+
+/* Global Styles */
+* {
+    color-scheme: light dark;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Text Colors */
+.text-primary {
+    color: var(--text-primary);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-tertiary {
+    color: var(--text-tertiary);
+}
+
+/* Background Colors */
+.bg-primary {
+    background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+    background-color: var(--bg-tertiary);
+}
+
+/* Card Styles */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+}
+
+.card-post {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+}
+
+/* Input Styles */
+input, textarea, .input, .textarea {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--input-border);
+    transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, .input:focus, .textarea:focus {
+    background-color: var(--input-bg);
+    border-color: var(--accent-blue);
+    outline: none;
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-blue-hover);
+}
+
+.btn-secondary {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Border Colors */
+.border-default {
+    border-color: var(--border-color);
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* Hover states */
+.hover-bg:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Transitions */
+.transition-theme {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Notification Animations */
+@keyframes pulse-notification {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes badge-pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.notify-pulse {
+    animation: pulse-notification 2s infinite;
+}
+
+.notify-slide {
+    animation: slide-in 0.3s ease-out;
+}
+
+.notify-badge {
+    animation: badge-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+

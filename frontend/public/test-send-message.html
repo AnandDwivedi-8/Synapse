@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Send Message</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input, button { padding: 10px; margin: 5px; }
+        #log { border: 1px solid #ccc; padding: 10px; margin-top: 20px; height: 300px; overflow-y: auto; background: #f5f5f5; }
+        .log-entry { margin: 5px 0; font-size: 12px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Test Message Send</h1>
+    <div>
+        <input type="text" id="receiverId" placeholder="Receiver ID" value="69346171a3a7e51ececfbc86">
+        <input type="text" id="message" placeholder="Message" value="Test message">
+        <button onclick="sendMessage()">Send Message</button>
+    </div>
+    <div id="log"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:4000/api/v1';
+
+        function log(msg, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry ' + type;
+            entry.textContent = new Date().toLocaleTimeString() + ' - ' + msg;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log('[' + type + ']', msg);
+        }
+
+        async function sendMessage() {
+            try {
+                const receiverId = document.getElementById('receiverId').value;
+                const message = document.getElementById('message').value;
+
+                log('Sending message...');
+                log('Receiver ID: ' + receiverId);
+                log('Message: ' + message);
+
+                const response = await fetch(`${API_BASE}/message/send/${receiverId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ textMessage: message }),
+                    credentials: 'include'  // This is crucial for sending cookies
+                });
+
+                log('Response status: ' + response.status);
+
+                const data = await response.json();
+                log('Response data: ' + JSON.stringify(data, null, 2));
+
+                if (data.success) {
+                    log('Message sent successfully!', 'success');
+                } else {
+                    log('Failed to send: ' + data.message, 'error');
+                }
+            } catch (error) {
+                log('Error: ' + error.message, 'error');
+                console.error(error);
+            }
+        }
+
+        // Test on load
+        log('Page loaded, ready to test');
+    </script>
+</body>
+</html>
